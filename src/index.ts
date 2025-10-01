@@ -11,8 +11,20 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
-	},
-} satisfies ExportedHandler<Env>;
+import { WorkerEntrypoint } from 'cloudflare:workers';
+import { handlerAuthUser } from './handlers/handler-auth-user';
+
+export default class extends WorkerEntrypoint<Env> {
+	async fetch(request: Request): Promise<Response> {
+		return new Response('Hello Nicolas');
+	}
+
+	async generateAuthLink(email: string, tenant: string, first_name: string) {
+		const { ok } = await handlerAuthUser(email, tenant, first_name, this.env, this.ctx);
+		if (ok) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}

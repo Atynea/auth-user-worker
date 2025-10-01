@@ -7,12 +7,19 @@
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"gen-types": "npx supabase gen types typescript --schema public > src/types/database.types.ts --project-id yvohvxndzycdfvrcalrt",
+		"saludo": "echo hola"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.8.19",
 		"typescript": "^5.5.2",
 		"vitest": "~3.2.0",
 		"wrangler": "^4.40.3"
+	},
+	"dependencies": {
+		"@react-email/render": "^1.2.2",
+		"@supabase/supabase-js": "^2.57.2",
+		"resend": "^6.0.2"
 	}
 }
