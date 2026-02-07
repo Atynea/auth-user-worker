@@ -10,6 +10,7 @@ declare namespace Cloudflare {
 		SUPABASE_SERVICE_ROLE_KEY: string;
 		RESEND_API_KEY: string;
 		REDIRECT_URL: string;
+        REDIRECT_CALL_PLATFORM_URL: string;
 	}
 }
 interface Env extends Cloudflare.Env {}
