@@ -56,7 +56,7 @@ export default async function handlerRegisterUserCall(
 
 		const hashToken = dataMagiclink.properties.hashed_token;
 
-		const url = `${env.REDIRECT_CALL_PLATFORM_URL}${call_id}/auth/verify?hashed_token=${hashToken}&type=signup`;
+		const url = `${env.REDIRECT_CALL_PLATFORM_URL}${call_id}/auth/verify?hashed_token=${hashToken}&type=signup&call=${call_id}`;
 
 		console.log('URL DE VERIFICACION:', url);
 
