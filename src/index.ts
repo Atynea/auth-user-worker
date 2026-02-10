@@ -13,8 +13,9 @@
 
 import { WorkerEntrypoint } from 'cloudflare:workers';
 import { handlerAuthUser } from './handlers/handler-auth-user';
+import handlerRegisterUserCall from './handlers/handler-register-user-call';
 
-export default class extends WorkerEntrypoint<Env> {
+export default class AuthUserWorker extends WorkerEntrypoint<Env> {
 	async fetch(request: Request): Promise<Response> {
 		return new Response('Hello Nicolas');
 	}
@@ -26,5 +27,14 @@ export default class extends WorkerEntrypoint<Env> {
 		} else {
 			return false;
 		}
+	}
+
+	async registerCallPostulant(email: string, tenant: string, display_name: string, call_id: string) {
+		const response = await handlerRegisterUserCall(email, tenant, display_name, call_id, this.env, this.ctx);
+
+		return {
+			ok: response.ok,
+			error: response.error || null,
+		};
 	}
 }

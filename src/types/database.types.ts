@@ -296,6 +296,123 @@ export type Database = {
           },
         ]
       }
+      call_questions: {
+        Row: {
+          call: string
+          choices: string[] | null
+          created_at: string
+          id: number
+          is_required: boolean
+          question: string
+          question_type: Database["public"]["Enums"]["question_type_call"]
+        }
+        Insert: {
+          call: string
+          choices?: string[] | null
+          created_at?: string
+          id?: number
+          is_required?: boolean
+          question: string
+          question_type: Database["public"]["Enums"]["question_type_call"]
+        }
+        Update: {
+          call?: string
+          choices?: string[] | null
+          created_at?: string
+          id?: number
+          is_required?: boolean
+          question?: string
+          question_type?: Database["public"]["Enums"]["question_type_call"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "call _questions_call_fkey"
+            columns: ["call"]
+            isOneToOne: false
+            referencedRelation: "calls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      calls: {
+        Row: {
+          cover: string
+          created_at: string
+          description: string
+          end_at: string
+          id: string
+          start_at: string
+          tenant: string
+          title: string
+        }
+        Insert: {
+          cover: string
+          created_at?: string
+          description: string
+          end_at: string
+          id: string
+          start_at: string
+          tenant: string
+          title: string
+        }
+        Update: {
+          cover?: string
+          created_at?: string
+          description?: string
+          end_at?: string
+          id?: string
+          start_at?: string
+          tenant?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calls_tenant_fkey"
+            columns: ["tenant"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      calls_aplications: {
+        Row: {
+          call: string
+          created_at: string
+          display_name: string
+          email: string
+          id: number
+          status: Database["public"]["Enums"]["postulants_calls_status_type"]
+          user: string
+        }
+        Insert: {
+          call: string
+          created_at?: string
+          display_name: string
+          email: string
+          id?: number
+          status?: Database["public"]["Enums"]["postulants_calls_status_type"]
+          user: string
+        }
+        Update: {
+          call?: string
+          created_at?: string
+          display_name?: string
+          email?: string
+          id?: number
+          status?: Database["public"]["Enums"]["postulants_calls_status_type"]
+          user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calls_aplications_call_fkey"
+            columns: ["call"]
+            isOneToOne: false
+            referencedRelation: "calls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       checking_forms: {
         Row: {
           created_at: string
@@ -655,6 +772,79 @@ export type Database = {
           },
         ]
       }
+      file_source_viewed_by: {
+        Row: {
+          created_at: string
+          display_name: string
+          file_source: number
+          id: number
+          tenant: string
+          tenant_permission: number
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          file_source: number
+          id?: number
+          tenant: string
+          tenant_permission: number
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          file_source?: number
+          id?: number
+          tenant?: string
+          tenant_permission?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "file_source_viewed_by_file_source_fkey"
+            columns: ["file_source"]
+            isOneToOne: false
+            referencedRelation: "file_sources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "file_source_viewed_by_tenant_fkey"
+            columns: ["tenant"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "file_source_viewed_by_tenant_permission_fkey"
+            columns: ["tenant_permission"]
+            isOneToOne: false
+            referencedRelation: "tenant_permissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      file_sources: {
+        Row: {
+          created_at: string
+          description: string
+          id: number
+          name: string
+          url_source: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: number
+          name: string
+          url_source: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: number
+          name?: string
+          url_source?: string
+        }
+        Relationships: []
+      }
       form_diagnostic_module_responses: {
         Row: {
           createad_at: string | null
@@ -698,6 +888,104 @@ export type Database = {
             columns: ["diagnostic_module_response_id"]
             isOneToOne: false
             referencedRelation: "diagnostic_module_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      log_rute_lessons: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: number
+          lesson: string
+          tenant: string
+          tenant_permission: number
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          id?: number
+          lesson: string
+          tenant: string
+          tenant_permission: number
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: number
+          lesson?: string
+          tenant?: string
+          tenant_permission?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "log_rute_lessons_lesson_fkey"
+            columns: ["lesson"]
+            isOneToOne: false
+            referencedRelation: "rutes_lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "log_rute_lessons_tenant_fkey"
+            columns: ["tenant"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "log_rute_lessons_tenant_permission_fkey"
+            columns: ["tenant_permission"]
+            isOneToOne: false
+            referencedRelation: "tenant_permissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      log_rutes: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: number
+          rute: string
+          tenant: string
+          tenant_permission: number
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          id?: number
+          rute: string
+          tenant: string
+          tenant_permission: number
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: number
+          rute?: string
+          tenant?: string
+          tenant_permission?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "log_rutes_rute_fkey"
+            columns: ["rute"]
+            isOneToOne: false
+            referencedRelation: "rutes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "log_rutes_tenant_fkey"
+            columns: ["tenant"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "log_rutes_tenant_permission_fkey"
+            columns: ["tenant_permission"]
+            isOneToOne: false
+            referencedRelation: "tenant_permissions"
             referencedColumns: ["id"]
           },
         ]
@@ -749,6 +1037,114 @@ export type Database = {
           skills?: string[]
         }
         Relationships: []
+      }
+      rutes: {
+        Row: {
+          cover: string
+          created_at: string
+          description: string | null
+          id: string
+          is_enable: boolean
+          name: string
+          tenant: string
+        }
+        Insert: {
+          cover: string
+          created_at?: string
+          description?: string | null
+          id: string
+          is_enable?: boolean
+          name: string
+          tenant: string
+        }
+        Update: {
+          cover?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_enable?: boolean
+          name?: string
+          tenant?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rutes_tenant_fkey"
+            columns: ["tenant"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rutes_lessons: {
+        Row: {
+          content: string | null
+          created_at: string
+          description: string | null
+          id: string
+          order: number
+          stage: number
+          title: string
+          url_video: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          id: string
+          order: number
+          stage: number
+          title: string
+          url_video?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          order?: number
+          stage?: number
+          title?: string
+          url_video?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lessons_rutes_stage_fkey"
+            columns: ["stage"]
+            isOneToOne: false
+            referencedRelation: "rutes_stages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rutes_stages: {
+        Row: {
+          created_at: string
+          id: number
+          order: number
+          rute: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          order: number
+          rute: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          order?: number
+          rute?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stage_rutes_rute_fkey"
+            columns: ["rute"]
+            isOneToOne: false
+            referencedRelation: "rutes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tags: {
         Row: {
@@ -1170,12 +1566,27 @@ export type Database = {
         }
         Returns: Json
       }
+      get_stage_and_lessons_per_rute: {
+        Args: { p_rute: string }
+        Returns: Json
+      }
+      get_viewed_rute_lessons: {
+        Args: { p_entrepreneur: number; p_rute: string }
+        Returns: Json
+      }
     }
     Enums: {
       author_role_enum: "mentor" | "organization"
       export_status: "pending" | "processing" | "done"
       export_type: "emprendedores" | "emprendimientos"
+      postulants_calls_status_type:
+        | "draft"
+        | "pending"
+        | "approved"
+        | "rejected"
+      question_form_type: "abierto" | "opciones" | "numero"
       question_type: "boolean" | "open" | "numeric"
+      question_type_call: "text" | "textarea" | "multiple-choice"
       subject_role_enum: "entrepreneur" | "business"
       user_type: "organization" | "entrepreneur" | "mentor"
     }
@@ -1308,7 +1719,15 @@ export const Constants = {
       author_role_enum: ["mentor", "organization"],
       export_status: ["pending", "processing", "done"],
       export_type: ["emprendedores", "emprendimientos"],
+      postulants_calls_status_type: [
+        "draft",
+        "pending",
+        "approved",
+        "rejected",
+      ],
+      question_form_type: ["abierto", "opciones", "numero"],
       question_type: ["boolean", "open", "numeric"],
+      question_type_call: ["text", "textarea", "multiple-choice"],
       subject_role_enum: ["entrepreneur", "business"],
       user_type: ["organization", "entrepreneur", "mentor"],
     },
