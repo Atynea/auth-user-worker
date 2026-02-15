@@ -1,4 +1,4 @@
-import { sendEmailVerifyUser } from '../emails/send-emails';
+import { sendEmail} from '../emails/send-emails';
 import { verificationUserIntoCall } from '../services/verification-user-into-call';
 import { getSupabaseAdminClient } from '../supabase/getAdminClient';
 import { templateSuccessRegisterCall } from '../templates/succes-register-call';
@@ -60,7 +60,7 @@ export default async function handlerRegisterUserCall(
 
 		console.log('URL DE VERIFICACION:', url);
 
-		const result = await sendEmailVerifyUser(
+		const result = await sendEmail(
 			{
 				from: 'hola@atynea.com',
 				to: email,
