@@ -7,7 +7,7 @@ export interface EmailOptions {
 	html: string;
 }
 
-export const sendEmailVerifyUser = async (options: EmailOptions, env: Env): Promise<boolean> => {
+export const sendEmail = async (options: EmailOptions, env: Env): Promise<boolean> => {
 	try {
 		const resend = new Resend(env.RESEND_API_KEY);
 		const { error } = await resend.emails.send({

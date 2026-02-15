@@ -11,6 +11,7 @@ declare namespace Cloudflare {
 		RESEND_API_KEY: string;
 		REDIRECT_URL: string;
         REDIRECT_CALL_PLATFORM_URL: string;
+        REDIRECT_PRINCIPAL_PLATFORM_URL: string;
 	}
 }
 interface Env extends Cloudflare.Env {}

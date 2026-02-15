@@ -1,4 +1,4 @@
-import { sendEmailVerifyUser } from '../emails/send-emails';
+import { sendEmail } from '../emails/send-emails';
 import { getSupabaseAdminClient } from '../supabase/getAdminClient';
 import { templateEmailVerifyUser } from '../templates/email-auth';
 
@@ -21,7 +21,7 @@ export async function handlerAuthUser(email: string, tenant: string, first_name:
 
 		console.log(url);
 
-		const result = await sendEmailVerifyUser(
+		const result = await sendEmail(
 			{
 				from: 'hola@atynea.com',
 				to: email,
