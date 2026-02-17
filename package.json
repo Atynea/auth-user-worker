@@ -9,7 +9,8 @@
 		"test": "vitest",
 		"cf-typegen": "wrangler types",
 		"gen-types": "npx supabase gen types typescript --schema public > src/types/database.types.ts --project-id yvohvxndzycdfvrcalrt",
-		"saludo": "echo hola"
+		"saludo": "echo hola",
+		"delete-branches": "git branch | grep -v main | xargs git branch -D"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.8.19",

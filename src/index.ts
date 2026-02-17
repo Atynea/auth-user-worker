@@ -14,6 +14,7 @@
 import { WorkerEntrypoint } from 'cloudflare:workers';
 import { handlerAuthUser } from './handlers/handler-auth-user';
 import handlerRegisterUserCall from './handlers/handler-register-user-call';
+import { handlerRegiserApprovedApplicationCall } from './handlers/handler-register-approved-aplication-call';
 
 export default class AuthUserWorker extends WorkerEntrypoint<Env> {
 	async fetch(request: Request): Promise<Response> {
@@ -36,5 +37,23 @@ export default class AuthUserWorker extends WorkerEntrypoint<Env> {
 			ok: response.ok,
 			error: response.error || null,
 		};
+	}
+
+	async registerApprovedAplicationCall(Supabase: string, email: string, tenant: string) {
+		const {ok} = await handlerRegiserApprovedApplicationCall(Supabase, email, tenant, this.env, this.ctx);
+		if(ok){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	async registerRejectedAplicationCall(display_name: string, email: string, tenant: string) {
+		const {ok} = await handlerRegiserApprovedApplicationCall(display_name, email, tenant, this.env, this.ctx);
+		if(ok){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
