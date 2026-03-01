@@ -15,6 +15,7 @@ import { WorkerEntrypoint } from 'cloudflare:workers';
 import { handlerAuthUser } from './handlers/handler-auth-user';
 import handlerRegisterUserCall from './handlers/handler-register-user-call';
 import { handlerRegiserApprovedApplicationCall } from './handlers/handler-register-approved-aplication-call';
+import { handlerRegiserRejectedApplicationCall } from './handlers/handler-register-rejected-aplication-call';
 
 export default class AuthUserWorker extends WorkerEntrypoint<Env> {
 	async fetch(request: Request): Promise<Response> {
@@ -39,8 +40,8 @@ export default class AuthUserWorker extends WorkerEntrypoint<Env> {
 		};
 	}
 
-	async registerApprovedAplicationCall(Supabase: string, email: string, tenant: string) {
-		const {ok} = await handlerRegiserApprovedApplicationCall(Supabase, email, tenant, this.env, this.ctx);
+	async registerApprovedAplicationCall(supabase: string, email: string, tenant: string) {
+		const {ok} = await handlerRegiserApprovedApplicationCall(supabase, email, tenant, this.env, this.ctx);
 		if(ok){
 			return true;
 		}else{
@@ -49,7 +50,7 @@ export default class AuthUserWorker extends WorkerEntrypoint<Env> {
 	}
 
 	async registerRejectedAplicationCall(display_name: string, email: string, tenant: string) {
-		const {ok} = await handlerRegiserApprovedApplicationCall(display_name, email, tenant, this.env, this.ctx);
+		const {ok} = await handlerRegiserRejectedApplicationCall(display_name, email, tenant, this.env, this.ctx);
 		if(ok){
 			return true;
 		}else{
